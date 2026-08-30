@@ -34,7 +34,7 @@ export default function Hero() {
         </a>
       </div>
 
-      <div className="mt-10 h-64 w-full max-w-2xl rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 md:h-80" />
+      <div className="mt-10 h-64 w-full max-w-2xl rounded-2xl bg-gradient-to from-gray-100 to-gray-200 md:h-80" />
     </section>
   );
 }
