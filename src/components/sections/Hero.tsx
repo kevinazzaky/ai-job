@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="container mx-auto flex flex-col items-center gap-8 px-4 py-20 text-center md:py-28"
+      className="container mx-auto flex flex-col items-center gap-6 px-4 pb-16 pt-14 text-center md:pb-20 md:pt-20"
     >
       <h1 className="max-w-3xl text-4xl font-bold leading-tight text-gray-900 md:text-6xl">
         How Will AI Change Your Job?
@@ -29,8 +29,6 @@ export default function Hero() {
           Pelajari Dulu
         </a>
       </div>
-
-      <div className="mt-10 h-64 w-full max-w-2xl rounded-2xl bg-gradient-to from-gray-100 to-gray-200 md:h-80" />
     </section>
   );
 }
