@@ -4,10 +4,6 @@ export default function Hero() {
       id="home"
       className="container mx-auto flex flex-col items-center gap-8 px-4 py-20 text-center md:py-28"
     >
-      <span className="rounded-full bg-gray-100 px-4 py-1 text-sm font-medium text-gray-600">
-        AI & Masa Depan Karier
-      </span>
-
       <h1 className="max-w-3xl text-4xl font-bold leading-tight text-gray-900 md:text-6xl">
         How Will AI Change Your Job?
       </h1>
