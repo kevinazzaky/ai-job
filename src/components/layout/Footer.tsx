@@ -20,7 +20,7 @@ export default function Footer() {
           <p className="text-lg font-bold text-white">AI Job Impact</p>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-gray-400">
             Landing page interaktif untuk memahami bagaimana AI mengubah cara
-            kerja di berbagai profesi — bukan sekadar ancaman, tapi pergeseran
+            kerja di berbagai profesi bukan sekadar ancaman, tapi pergeseran
             cara kerja.
           </p>
         </div>
