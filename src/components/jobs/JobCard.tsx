@@ -27,37 +27,34 @@ export default function JobCard({
       onClick={onSelect}
       aria-pressed={isActive}
       className={clsx(
-        "flex w-full flex-col items-start gap-3 rounded-2xl border p-5 text-left transition-all hover:-translate-y-1 hover:shadow-md",
+        "card-hover flex w-full flex-col items-start gap-3 rounded-2xl border p-5 text-left",
         isActive
-          ? "border-gray-900 bg-gray-900 text-white"
-          : "border-gray-200 bg-white text-gray-900",
+          ? "border-transparent bg-[var(--color-primary)] text-white"
+          : "border-slate-200 bg-white text-slate-950"
       )}
     >
       <div
         className={clsx(
           "inline-flex h-10 w-10 items-center justify-center rounded-xl",
-          isActive ? "bg-white/10 text-white" : "bg-gray-100 text-gray-900",
+          isActive
+            ? "bg-[var(--color-accent)] text-white"
+            : "bg-slate-100 text-slate-950"
         )}
       >
         <Icon size={20} />
       </div>
 
       <div>
-        <h3 className="font-semibold">{job.title}</h3>
-        <p
-          className={clsx(
-            "text-xs",
-            isActive ? "text-gray-300" : "text-gray-500",
-          )}
-        >
+        <h3 className="font-bold">{job.title}</h3>
+        <p className={clsx("text-xs", isActive ? "text-white/60" : "text-slate-500")}>
           {job.category}
         </p>
       </div>
 
       <span
         className={clsx(
-          "rounded-full px-2 py-1 text-xs font-medium",
-          isActive ? "bg-white/15 text-white" : LEVEL_BADGE[job.impactLevel],
+          "rounded-full px-2.5 py-1 text-xs font-bold",
+          isActive ? "bg-white/15 text-white" : LEVEL_BADGE[job.impactLevel]
         )}
       >
         {job.impactLevel} Impact
