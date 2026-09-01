@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X, Sparkles } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Beranda", href: "#home" },
@@ -13,68 +13,115 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 40);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
-      <nav className="container mx-auto flex items-center justify-between px-4 py-4">
-        <a href="#home" className="text-lg font-bold text-gray-900">
-          AI Job Impact
+    <header className="fixed left-0 top-0 z-50 w-full px-4 pt-4">
+      <div
+        className={`mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full border px-5 shadow-sm backdrop-blur-xl transition-all duration-300 ${
+          isScrolled
+            ? "border-slate-200/80 bg-white/90 text-slate-950 shadow-lg"
+            : "border-white/15 bg-white/10 text-white"
+        }`}
+      >
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-2.5">
+          <span
+            className={`inline-flex h-9 w-9 items-center justify-center rounded-full ${
+              isScrolled
+                ? "bg-(--color-primary)]"
+                : "bg-white/15"
+            }`}
+          >
+            <Sparkles
+              size={16}
+              className="text-[var(--color-accent)]"
+            />
+          </span>
+
+          <span className="text-sm font-black leading-none sm:text-base">
+            AI Job Impact
+          </span>
         </a>
 
-        <ul className="hidden items-center gap-6 md:flex">
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-6 lg:flex">
           {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
-              >
-                {link.label}
-              </a>
-            </li>
+            <a
+              key={link.href}
+              href={link.href}
+              className={`text-sm font-semibold transition ${
+                isScrolled
+                  ? "text-slate-700 hover:text-[var(--color-violet)]"
+                  : "text-white/80 hover:text-[var(--color-accent)]"
+              }`}
+            >
+              {link.label}
+            </a>
           ))}
-        </ul>
+        </nav>
 
+        {/* Desktop CTA */}
         <a
           href="#jobs"
-          className="hidden rounded-full bg-gray-900 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-700 md:inline-block"
+          className="hidden rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:opacity-90 lg:inline-block"
         >
           Explore Jobs
         </a>
 
+        {/* Mobile Menu Button */}
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 md:hidden"
           aria-label={isOpen ? "Tutup menu" : "Buka menu"}
           aria-expanded={isOpen}
+          className={`inline-flex items-center justify-center rounded-full border p-2 lg:hidden ${
+            isScrolled
+              ? "border-slate-200 text-slate-700"
+              : "border-white/20 text-white"
+          }`}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
-      </nav>
+      </div>
 
+      {/* Mobile Navigation */}
       {isOpen && (
-        <ul className="flex flex-col gap-1 border-t border-gray-200 bg-white px-4 py-3 md:hidden">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
+        <div className="mx-auto mt-3 max-w-6xl rounded-3xl border border-white/15 bg-[var(--color-primary)]/95 px-5 py-5 text-white shadow-lg backdrop-blur-2xl lg:hidden">
+          <div className="grid gap-4">
+            {NAV_LINKS.map((link) => (
               <a
+                key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block rounded-md px-2 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="text-sm font-semibold text-white/80 transition hover:text-[var(--color-accent)]"
               >
                 {link.label}
               </a>
-            </li>
-          ))}
-          <li>
+            ))}
+
             <a
               href="#jobs"
               onClick={() => setIsOpen(false)}
-              className="mt-1 block rounded-full bg-gray-900 px-4 py-2 text-center text-sm font-semibold text-white"
+              className="rounded-full bg-[var(--color-accent)] px-5 py-3 text-center text-sm font-black text-white"
             >
               Explore Jobs
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       )}
     </header>
   );
