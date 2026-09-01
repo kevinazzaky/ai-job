@@ -41,15 +41,10 @@ export default function Navbar() {
         <a href="#home" className="flex items-center gap-2.5">
           <span
             className={`inline-flex h-9 w-9 items-center justify-center rounded-full ${
-              isScrolled
-                ? "bg-(--color-primary)]"
-                : "bg-white/15"
+              isScrolled ? "bg-[var(--color-primary)]" : "bg-white/15"
             }`}
           >
-            <Sparkles
-              size={16}
-              className="text-[var(--color-accent)]"
-            />
+            <Sparkles size={16} className="text-[var(--color-accent)]" />
           </span>
 
           <span className="text-sm font-black leading-none sm:text-base">
