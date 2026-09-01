@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #150f2e;
-  --color-secondary: #1f1642;
+  --color-primary: #0c1a2e;
+  --color-secondary: #0f2540;
 
-  --color-accent: #ff7a59;
-  --color-accent-soft: #fff1ec;
+  --color-accent: #0ea5e9;
+  --color-accent-soft: #e0f2fe;
 
-  --color-violet: #7c5cff;
-  --color-violet-dark: #2f1f70;
-  --color-violet-soft: #f2efff;
+  --color-blue: #0284c7;
+  --color-blue-dark: #0c4a6e;
+  --color-blue-soft: #f0f9ff;
 
   --color-soft: #f8fafc;
   --color-border: #e2e8f0;
@@ -28,12 +28,12 @@ body {
   background-image:
     radial-gradient(
       circle at 20% 20%,
-      rgba(124, 92, 255, 0.08),
+      rgba(14, 165, 233, 0.08),
       transparent 28%
     ),
     radial-gradient(
       circle at 80% 10%,
-      rgba(255, 122, 89, 0.1),
+      rgba(2, 132, 199, 0.08),
       transparent 24%
     ),
     linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
@@ -43,19 +43,19 @@ body {
   background:
     radial-gradient(
       circle at top right,
-      rgba(255, 122, 89, 0.2),
+      rgba(14, 165, 233, 0.22),
       transparent 34%
     ),
     radial-gradient(
       circle at bottom left,
-      rgba(124, 92, 255, 0.28),
+      rgba(2, 132, 199, 0.22),
       transparent 36%
     ),
     linear-gradient(
       135deg,
       var(--color-primary) 0%,
       var(--color-secondary) 55%,
-      var(--color-violet-dark) 100%
+      var(--color-blue-dark) 100%
     );
 }
 
