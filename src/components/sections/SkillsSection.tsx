@@ -10,36 +10,42 @@ import {
 const SKILLS = [
   {
     icon: Brain,
+    tint: "violet",
     title: "Critical & Strategic Thinking",
     description:
       "Kemampuan menilai konteks, trade-off, dan dampak keputusan — sesuatu yang AI belum bisa lakukan sendiri.",
   },
   {
     icon: MessagesSquare,
+    tint: "accent",
     title: "Berkolaborasi dengan AI (Prompting)",
     description:
       "Memahami cara memberi instruksi yang jelas ke AI dan mengevaluasi hasilnya secara kritis.",
   },
   {
     icon: LineChart,
+    tint: "violet",
     title: "Data Literacy",
     description:
       "Membaca, menafsirkan, dan mengambil keputusan berdasarkan data — bukan sekadar menjalankan tools.",
   },
   {
     icon: Palette,
+    tint: "accent",
     title: "Creative & Aesthetic Judgment",
     description:
       "Menilai mana hasil kreatif yang benar-benar relevan dengan brand, audiens, dan konteks.",
   },
   {
     icon: HeartHandshake,
+    tint: "violet",
     title: "Communication & Empathy",
     description:
       "Membangun kepercayaan, negosiasi, dan memahami kebutuhan orang lain secara manusiawi.",
   },
   {
     icon: RefreshCw,
+    tint: "accent",
     title: "Adaptability & Continuous Learning",
     description:
       "Kesediaan terus belajar tools dan cara kerja baru seiring teknologi berubah cepat.",
@@ -48,13 +54,16 @@ const SKILLS = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="bg-gray-50 py-20">
+    <section id="skills" className="section-pattern py-20">
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
+          <p className="mb-3 inline-flex rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-[var(--color-violet)]">
+            Persiapan Karier
+          </p>
+          <h2 className="text-3xl font-black text-slate-950 md:text-4xl">
             Skills to Build Next
           </h2>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-slate-600">
             Skill-skill ini relevan di hampir semua profesi yang terdampak AI,
             apa pun bidangmu.
           </p>
@@ -63,13 +72,23 @@ export default function SkillsSection() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SKILLS.map((skill) => {
             const Icon = skill.icon;
+            const isViolet = skill.tint === "violet";
             return (
-              <div key={skill.title} className="rounded-2xl bg-white p-6 shadow-sm">
-                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gray-900 text-white">
+              <div
+                key={skill.title}
+                className="card-hover rounded-2xl border border-slate-200 bg-white p-6"
+              >
+                <div
+                  className={`mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl ${
+                    isViolet
+                      ? "bg-[var(--color-violet-soft)] text-[var(--color-violet)]"
+                      : "bg-[var(--color-accent-soft)] text-[var(--color-accent)]"
+                  }`}
+                >
                   <Icon size={20} />
                 </div>
-                <h3 className="mb-2 font-semibold text-gray-900">{skill.title}</h3>
-                <p className="text-sm text-gray-600">{skill.description}</p>
+                <h3 className="mb-2 font-bold text-slate-950">{skill.title}</h3>
+                <p className="text-sm text-slate-600">{skill.description}</p>
               </div>
             );
           })}
