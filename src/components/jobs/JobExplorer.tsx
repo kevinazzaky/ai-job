@@ -7,11 +7,11 @@ import JobCard from "@/src/components/jobs/JobCard";
 import JobDetail from "@/src/components/jobs/JobDetail";
 
 export default function JobExplorer() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("Semua");
   const [selectedJobId, setSelectedJobId] = useState(jobs[0]?.id);
 
   const filteredJobs = useMemo(() => {
-    if (activeCategory === "All") return jobs;
+    if (activeCategory === "Semua") return jobs;
     return jobs.filter((job) => job.category === activeCategory);
   }, [activeCategory]);
 
@@ -21,18 +21,20 @@ export default function JobExplorer() {
   function handleFilterChange(category: string) {
     setActiveCategory(category);
     const nextJobs =
-      category === "All" ? jobs : jobs.filter((job) => job.category === category);
+      category === "Semua"
+        ? jobs
+        : jobs.filter((job) => job.category === category);
     setSelectedJobId(nextJobs[0]?.id);
   }
 
   return (
     <section id="jobs" className="container mx-auto px-4 py-20">
       <div className="mx-auto mb-10 max-w-2xl text-center">
-        <p className="mb-3 inline-flex rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-[var(--color-violet)]">
-          Job Explorer
+        <p className="mb-3 inline-flex rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-[var(--color-accent)]">
+          Eksplorasi Pekerjaan
         </p>
         <h2 className="text-3xl font-black text-slate-950 md:text-4xl">
-          Explore How AI Impacts Different Jobs
+          Jelajahi Dampak AI di Berbagai Pekerjaan
         </h2>
         <p className="mt-4 text-slate-600">
           Pilih kategori untuk memfilter, lalu klik salah satu pekerjaan untuk
