@@ -7,9 +7,9 @@ import Footer from "@/src/components/layout/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AI Job Impact — How AI Is Changing Work",
+  title: "AI Job Impact — Bagaimana AI Mengubah Cara Kerja",
   description:
-    "Explore how AI may impact different careers and discover skills to build next.",
+    "Jelajahi bagaimana AI dapat memengaruhi berbagai profesi dan temukan skill yang perlu kamu kuasai selanjutnya.",
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="id">
       <body className={`${inter.className} antialiased`}>
         <Navbar />
         <main>{children}</main>
