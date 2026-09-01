@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 
-const LEVEL_COLORS: Record<string, string> = {
-  Low: "bg-emerald-500",
-  Medium: "bg-amber-500",
-  High: "bg-rose-500",
+const LEVEL_GRADIENT: Record<string, string> = {
+  Low: "from-emerald-400 to-emerald-500",
+  Medium: "from-amber-400 to-amber-500",
+  High: "from-rose-400 to-rose-500",
 };
 
 export default function ImpactBar({
@@ -17,16 +17,16 @@ export default function ImpactBar({
 }) {
   return (
     <div>
-      <div className="mb-1 flex items-center justify-between text-sm font-medium text-gray-700">
+      <div className="mb-1.5 flex items-center justify-between text-sm font-bold text-slate-700">
         <span>AI Impact Score</span>
         <span>{score}/100</span>
       </div>
-      <div className="h-3 w-full overflow-hidden rounded-full bg-gray-100">
+      <div className="h-3 w-full overflow-hidden rounded-full bg-slate-100">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${score}%` }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className={`h-full rounded-full ${LEVEL_COLORS[level]}`}
+          className={`h-full rounded-full bg-gradient-to-r ${LEVEL_GRADIENT[level]}`}
         />
       </div>
     </div>
