@@ -18,7 +18,7 @@ export default function ImpactBar({
   return (
     <div>
       <div className="mb-1.5 flex items-center justify-between text-sm font-bold text-slate-700">
-        <span>AI Impact Score</span>
+        <span>Skor Dampak AI</span>
         <span>{score}/100</span>
       </div>
       <div className="h-3 w-full overflow-hidden rounded-full bg-slate-100">
