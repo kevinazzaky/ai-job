@@ -22,8 +22,8 @@ export default function FilterBar({
           className={clsx(
             "rounded-full border px-4 py-2 text-sm font-bold transition-colors",
             activeCategory === category
-              ? "border-transparent bg-(--color-primary)] text-white"
-              : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+              ? "border-transparent bg-[var(--color-primary)] text-white"
+              : "border-slate-200 bg-white text-slate-600 hover:border-slate-300",
           )}
         >
           {category}
