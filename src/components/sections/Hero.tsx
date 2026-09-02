@@ -1,26 +1,56 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { jobs } from "@/src/data/jobs";
 import { getJobIcon } from "@/lib/icon-map";
 
-const LEVEL_COLOR: Record<string, string> = {
-  Low: "bg-emerald-500",
-  Medium: "bg-amber-500",
-  High: "bg-rose-500",
+const LEVEL_LABEL: Record<string, string> = {
+  Low: "Rendah",
+  Medium: "Sedang",
+  High: "Tinggi",
 };
 
-const sortedJobs = [...jobs].sort((a, b) => b.impactScore - a.impactScore);
+const LEVEL_GRADIENT: Record<string, string> = {
+  Low: "from-emerald-400 to-emerald-500",
+  Medium: "from-amber-400 to-amber-500",
+  High: "from-rose-400 to-rose-500",
+};
+
+const ROTATE_INTERVAL_MS = 2500;
 
 export default function Hero() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % jobs.length);
+    }, ROTATE_INTERVAL_MS);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const activeJob = jobs[activeIndex];
+  const Icon = getJobIcon(activeJob.icon);
+
   return (
     <section
       id="home"
-      className="relative overflow-hidden pt-32 pb-20 text-white dark-pattern md:pb-28"
+      className="dark-pattern relative overflow-hidden pt-32 pb-20 text-white md:pb-28"
     >
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/5 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-white/5 to-transparent" />
 
       <div className="container relative mx-auto grid items-center gap-12 px-4 lg:grid-cols-[1.05fr_0.95fr]">
+        {/* Hero Content */}
         <div>
-          <p className="mb-5 inline-flex rounded-full border border-[var(--color-accent)]/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+          <p className="mb-5 inline-flex rounded-full border border-(--color-accent)/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-(--color-accent)">
             AI & Masa Depan Karier
           </p>
 
@@ -34,11 +64,10 @@ export default function Hero() {
             dan temukan skill yang perlu kamu perkuat.
           </p>
 
-          {/* CTA */}
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
               href="#jobs"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3 text-sm font-black text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:opacity-90"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-(--color-accent) px-7 py-3 text-sm font-black text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:opacity-90"
             >
               Jelajahi Pekerjaan
               <ArrowRight size={16} />
@@ -55,59 +84,79 @@ export default function Hero() {
 
         {/* Impact Card */}
         <div className="relative">
-          <div className="absolute -inset-4 rounded-[2.5rem] bg-[var(--color-accent)]/15 blur-2xl" />
+          <div className="absolute -inset-4 rounded-[2.5rem] bg-(--color-accent)/15 blur-2xl" />
 
           <div className="relative rounded-[2rem] border border-white/10 bg-white/10 p-3 shadow-2xl backdrop-blur">
-            <div className="rounded-[1.5rem] bg-white p-6 text-slate-950 sm:p-7">
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-[var(--color-accent)]">
-                Dampak AI di 6 Pekerjaan
+            <div className="relative min-h-[300px] overflow-hidden rounded-[1.5rem] bg-white p-7 text-slate-950">
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-(--color-accent)">
+                Dampak AI Saat Ini
               </p>
 
-              <h2 className="mt-2 text-xl font-black leading-tight text-slate-950">
-                Cek Skor Dampaknya
-              </h2>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeJob.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <div className="mt-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-(--color-primary) text-white">
+                    <Icon size={22} />
+                  </div>
 
-              <div className="mt-5 space-y-3.5">
-                {sortedJobs.map((job) => {
-                  const Icon = getJobIcon(job.icon);
+                  <h2 className="mt-4 text-2xl font-black leading-tight text-slate-950">
+                    {activeJob.title}
+                  </h2>
 
-                  return (
-                    <div key={job.id} className="flex items-center gap-3">
-                      <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
-                        <Icon size={16} />
-                      </div>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-400">
+                    {activeJob.category}
+                  </p>
 
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center justify-between gap-2">
-                          <p className="truncate text-sm font-bold text-slate-900">
-                            {job.title}
-                          </p>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {activeJob.description}
+                  </p>
 
-                          <span className="shrink-0 text-xs font-bold text-slate-500">
-                            {job.impactScore}
-                          </span>
-                        </div>
+                  <div className="mt-6">
+                    <div className="mb-1.5 flex items-center justify-between text-xs font-bold text-slate-500">
+                      <span>Skor Dampak AI</span>
 
-                        <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
-                          <div
-                            className={`h-full rounded-full ${LEVEL_COLOR[job.impactLevel]}`}
-                            style={{ width: `${job.impactScore}%` }}
-                          />
-                        </div>
-                      </div>
+                      <span>
+                        {activeJob.impactScore}/100 ·{" "}
+                        {LEVEL_LABEL[activeJob.impactLevel]}
+                      </span>
                     </div>
-                  );
-                })}
-              </div>
 
-              {/* Detail CTA */}
-              <a
-                href="#jobs"
-                className="mt-6 flex items-center justify-center gap-2 rounded-full bg-[var(--color-primary)] px-5 py-2.5 text-sm font-black text-white transition hover:opacity-90"
-              >
-                Lihat Detail Lengkap
-                <ArrowRight size={14} />
-              </a>
+                    <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+                      <motion.div
+                        key={`${activeJob.id}-bar`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${activeJob.impactScore}%` }}
+                        transition={{
+                          duration: 0.6,
+                          ease: "easeOut",
+                        }}
+                        className={`h-full rounded-full bg-linear-to-r ${
+                          LEVEL_GRADIENT[activeJob.impactLevel]
+                        }`}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Pagination Indicator */}
+              <div className="mt-6 flex items-center justify-center gap-1.5">
+                {jobs.map((job, index) => (
+                  <span
+                    key={job.id}
+                    className={`h-1.5 rounded-full transition-all ${
+                      index === activeIndex
+                        ? "w-6 bg-(--color-accent)"
+                        : "w-1.5 bg-slate-200"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
