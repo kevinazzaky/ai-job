@@ -16,11 +16,8 @@ export default function HumanAI() {
   return (
     <section id="human-ai" className="container mx-auto px-4 py-20">
       <div className="mx-auto mb-12 max-w-2xl text-center">
-        <p className="mb-3 inline-flex rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-[var(--color-accent)]">
-          Kolaborasi, Bukan Kompetisi
-        </p>
         <h2 className="text-3xl font-black text-slate-950 md:text-4xl">
-          Bukan Manusia vs AI. Tapi Manusia + AI.
+          Bukan Manusia vs AI Tapi Manusia + AI
         </h2>
         <p className="mt-4 text-slate-600">
           Masa depan kerja yang paling produktif adalah kolaborasi, bukan

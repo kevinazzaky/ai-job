@@ -50,10 +50,6 @@ export default function Hero() {
       <div className="container relative mx-auto grid items-center gap-12 px-4 lg:grid-cols-[1.05fr_0.95fr]">
         {/* Hero Content */}
         <div>
-          <p className="mb-5 inline-flex rounded-full border border-(--color-accent)/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-(--color-accent)">
-            AI & Masa Depan Karier
-          </p>
-
           <h1 className="max-w-2xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             Bagaimana AI Akan Mengubah Pekerjaanmu?
           </h1>

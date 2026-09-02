@@ -30,9 +30,6 @@ export default function JobExplorer() {
   return (
     <section id="jobs" className="container mx-auto px-4 py-20">
       <div className="mx-auto mb-10 max-w-2xl text-center">
-        <p className="mb-3 inline-flex rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.15em] text-[var(--color-accent)]">
-          Eksplorasi Pekerjaan
-        </p>
         <h2 className="text-3xl font-black text-slate-950 md:text-4xl">
           Jelajahi Dampak AI di Berbagai Pekerjaan
         </h2>
