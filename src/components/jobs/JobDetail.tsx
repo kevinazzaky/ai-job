@@ -4,12 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { Job } from "@/src/data/jobs";
 import ImpactBar from "@/src/components/jobs/ImpactBar";
 
+const LEVEL_LABEL: Record<string, string> = {
+  Low: "Rendah",
+  Medium: "Sedang",
+  High: "Tinggi",
+};
+
 export default function JobDetail({ job }: { job: Job | undefined }) {
   return (
-    <div
-      aria-live="polite"
-      className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8"
-    >
+    <div aria-live="polite" className="border-l border-slate-200 pl-8">
       <AnimatePresence mode="wait">
         {job ? (
           <motion.div
@@ -19,38 +22,52 @@ export default function JobDetail({ job }: { job: Job | undefined }) {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
           >
-            <p className="text-xs font-black uppercase tracking-[0.15em] text-[var(--color-accent)]">
-              {job.category}
+            <p className="text-xs text-slate-500">{job.category}</p>
+            <h3 className="font-display mt-1 text-2xl font-medium text-slate-950">
+              {job.title}
+            </h3>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              {job.description}
             </p>
-            <h3 className="mt-2 text-2xl font-black text-slate-950">{job.title}</h3>
-            <p className="mt-3 text-slate-600">{job.description}</p>
 
-            <div className="mt-6">
-              <ImpactBar score={job.impactScore} level={job.impactLevel} />
+            <div className="mt-5 border-y border-slate-200 py-4">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-slate-500">Skor dampak AI</span>
+                <span className="font-semibold text-slate-950">
+                  {LEVEL_LABEL[job.impactLevel]}
+                </span>
+              </div>
+              <div className="mt-2.5">
+                <ImpactBar
+                  score={job.impactScore}
+                  level={job.impactLevel}
+                  size="md"
+                />
+              </div>
             </div>
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl bg-[var(--color-blue-soft)] p-4">
-                <h4 className="mb-2 text-sm font-black text-[var(--color-blue)]">
-                  Tugas yang Bisa Dibantu AI
+            <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              <div>
+                <h4 className="text-xs font-medium text-slate-400">
+                  Dibantu AI
                 </h4>
-                <ul className="space-y-1.5 text-sm text-slate-700">
+                <ul className="mt-3 space-y-2 text-sm text-slate-700">
                   {job.aiTasks.map((task) => (
                     <li key={task} className="flex gap-2">
-                      <span className="text-[var(--color-blue)]">•</span>
+                      <span className="text-slate-300">–</span>
                       {task}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="rounded-2xl bg-[var(--color-accent-soft)] p-4">
-                <h4 className="mb-2 text-sm font-black text-[var(--color-accent)]">
-                  Kekuatan Manusia
+              <div>
+                <h4 className="text-xs font-medium text-slate-400">
+                  Kekuatan manusia
                 </h4>
-                <ul className="space-y-1.5 text-sm text-slate-700">
+                <ul className="mt-3 space-y-2 text-sm text-slate-700">
                   {job.humanSkills.map((skill) => (
                     <li key={skill} className="flex gap-2">
-                      <span className="text-[var(--color-accent)]">•</span>
+                      <span className="text-slate-300">–</span>
                       {skill}
                     </li>
                   ))}
@@ -59,8 +76,9 @@ export default function JobDetail({ job }: { job: Job | undefined }) {
             </div>
           </motion.div>
         ) : (
-          <p className="text-center text-slate-500">
-            Pilih salah satu pekerjaan di atas untuk melihat detail dampak AI-nya.
+          <p className="text-sm text-slate-500">
+            Pilih salah satu pekerjaan di samping untuk melihat detail dampak
+            AI-nya.
           </p>
         )}
       </AnimatePresence>
