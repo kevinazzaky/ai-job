@@ -20,54 +20,10 @@ html {
 }
 
 body {
-  background: var(--color-soft);
+  background: #ffffff;
   color: #0f172a;
 }
 
-.section-pattern {
-  background-image:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(14, 165, 233, 0.08),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 80% 10%,
-      rgba(2, 132, 199, 0.08),
-      transparent 24%
-    ),
-    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-}
-
-.dark-pattern {
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(14, 165, 233, 0.22),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      rgba(2, 132, 199, 0.22),
-      transparent 36%
-    ),
-    linear-gradient(
-      135deg,
-      var(--color-primary) 0%,
-      var(--color-secondary) 55%,
-      var(--color-blue-dark) 100%
-    );
-}
-
-.card-hover {
-  transition:
-    transform 220ms ease,
-    box-shadow 220ms ease,
-    border-color 220ms ease,
-    background 220ms ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+.font-display {
+  font-family: var(--font-fraunces), serif;
 }
