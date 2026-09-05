@@ -28,36 +28,38 @@ export default function JobExplorer() {
   }
 
   return (
-    <section id="jobs" className="container mx-auto px-4 py-20">
-      <div className="mx-auto mb-10 max-w-2xl text-center">
-        <h2 className="text-3xl font-black text-slate-950 md:text-4xl">
-          Jelajahi Dampak AI di Berbagai Pekerjaan
-        </h2>
-        <p className="mt-4 text-slate-600">
-          Pilih kategori untuk memfilter, lalu klik salah satu pekerjaan untuk
-          melihat detail dampaknya.
-        </p>
-      </div>
-
-      <FilterBar
-        categories={categories}
-        activeCategory={activeCategory}
-        onChange={handleFilterChange}
-      />
-
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_1.4fr]">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {filteredJobs.map((job) => (
-            <JobCard
-              key={job.id}
-              job={job}
-              isActive={job.id === selectedJob?.id}
-              onSelect={() => setSelectedJobId(job.id)}
-            />
-          ))}
+    <section id="jobs" className="border-t border-slate-200 py-20">
+      <div className="container mx-auto px-4">
+        <div className="mb-10 max-w-xl">
+          <h2 className="font-display text-3xl font-medium text-slate-950">
+            Jelajahi dampak AI di berbagai pekerjaan
+          </h2>
+          <p className="mt-3 text-sm text-slate-600">
+            Pilih kategori untuk memfilter, lalu klik salah satu pekerjaan
+            untuk melihat detail dampaknya.
+          </p>
         </div>
 
-        <JobDetail job={selectedJob} />
+        <FilterBar
+          categories={categories}
+          activeCategory={activeCategory}
+          onChange={handleFilterChange}
+        />
+
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
+          <div className="divide-y divide-slate-100">
+            {filteredJobs.map((job) => (
+              <JobCard
+                key={job.id}
+                job={job}
+                isActive={job.id === selectedJob?.id}
+                onSelect={() => setSelectedJobId(job.id)}
+              />
+            ))}
+          </div>
+
+          <JobDetail job={selectedJob} />
+        </div>
       </div>
     </section>
   );
