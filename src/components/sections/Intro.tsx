@@ -1,24 +1,16 @@
-import { Sparkles, TrendingUp, HeartHandshake } from "lucide-react";
-
 const CONCEPTS = [
   {
-    icon: Sparkles,
-    tint: "blue",
-    title: "AI Mengubah Tugas, Bukan Menghapus Semua Pekerjaan",
+    title: "AI mengubah tugas, bukan menghapus semua pekerjaan",
     description:
       "AI paling efektif mengambil alih tugas yang repetitif dan berbasis pola. Sebagian besar pekerjaan akan berubah bentuk, bukan hilang sepenuhnya.",
   },
   {
-    icon: TrendingUp,
-    tint: "accent",
-    title: "Sebagian Skill Akan Semakin Bernilai",
+    title: "Sebagian skill akan semakin bernilai",
     description:
       "Kemampuan berpikir kritis, berkolaborasi dengan AI, dan mengambil keputusan berbasis konteks akan makin dicari di berbagai industri.",
   },
   {
-    icon: HeartHandshake,
-    tint: "blue",
-    title: "Manusia Tetap Memegang Kendali",
+    title: "Manusia tetap memegang kendali",
     description:
       "Empati, penilaian etis, kreativitas, dan hubungan antarmanusia adalah area yang paling sulit digantikan AI dalam waktu dekat.",
   },
@@ -26,44 +18,33 @@ const CONCEPTS = [
 
 export default function Intro() {
   return (
-    <section id="intro" className="section-pattern py-20">
+    <section id="intro" className="border-t border-slate-200 py-20">
       <div className="container mx-auto px-4">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h2 className="text-3xl font-black text-slate-950 md:text-4xl">
-            AI Mengubah Cara Kerja — Bukan Cuma Pekerjaan
+        <div className="grid gap-10 lg:grid-cols-[0.6fr_1.4fr] lg:gap-16">
+          <h2 className="font-display text-3xl font-medium leading-tight text-slate-950">
+            AI mengubah cara kerja, bukan cuma pekerjaan
           </h2>
-          <p className="mt-4 text-slate-600">
-            Sebelum melihat dampaknya ke pekerjaan spesifik, penting untuk
-            memahami tiga hal dasar tentang bagaimana AI benar-benar mengubah
-            cara kita bekerja.
-          </p>
-        </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {CONCEPTS.map((concept) => {
-            const Icon = concept.icon;
-            const isBlue = concept.tint === "blue";
-            return (
+          <div>
+            {CONCEPTS.map((concept, index) => (
               <div
                 key={concept.title}
-                className="card-hover rounded-2xl border border-slate-200 bg-white p-6"
+                className="grid gap-2 border-b border-slate-200 py-6 first:pt-0 sm:grid-cols-[3rem_1fr] sm:gap-6"
               >
-                <div
-                  className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${
-                    isBlue
-                      ? "bg-[var(--color-blue-soft)] text-[var(--color-blue)]"
-                      : "bg-[var(--color-accent-soft)] text-[var(--color-accent)]"
-                  }`}
-                >
-                  <Icon size={22} />
+                <span className="font-display text-2xl text-slate-300">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-950">
+                    {concept.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    {concept.description}
+                  </p>
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-slate-950">
-                  {concept.title}
-                </h3>
-                <p className="text-sm text-slate-600">{concept.description}</p>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </section>
