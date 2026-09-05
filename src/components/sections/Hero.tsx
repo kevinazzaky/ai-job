@@ -1,20 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Fraunces } from "next/font/google";
 import { jobs } from "@/src/data/jobs";
 import { getJobIcon } from "@/lib/icon-map";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-});
-
-const LEVEL_COLOR: Record<string, string> = {
-  Low: "bg-emerald-500",
-  Medium: "bg-amber-500",
-  High: "bg-rose-500",
-};
+import ImpactBar from "@/src/components/jobs/ImpactBar";
 
 const ROTATE_INTERVAL_MS = 2500;
 const ROW_HEIGHT = 56;
@@ -26,7 +15,7 @@ export default function Hero() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (prefersReducedMotion) return;
@@ -41,14 +30,13 @@ export default function Hero() {
   return (
     <section id="home" className="pt-28 pb-16 md:pt-36 md:pb-24">
       <div className="container mx-auto grid gap-14 px-4 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
+        {/* LEFT */}
         <div className="max-w-xl">
           <p className="mb-5 text-sm text-slate-500">
             Indeks dampak AI dari 6 profesi
           </p>
 
-          <h1
-            className={`${fraunces.className} text-4xl font-medium leading-[1.1] tracking-tight text-slate-950 sm:text-5xl`}
-          >
+          <h1 className="font-display text-4xl font-medium leading-[1.1] tracking-tight text-slate-950 sm:text-5xl">
             Bagaimana AI akan mengubah pekerjaanmu?
           </h1>
 
@@ -75,6 +63,7 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* RIGHT */}
         <div>
           <div className="flex items-center justify-between border-b border-slate-300 pb-2 text-xs text-slate-500">
             <span>Profesi</span>
@@ -92,7 +81,6 @@ export default function Hero() {
 
             {sortedJobs.map((job, index) => {
               const Icon = getJobIcon(job.icon);
-              const filledTicks = Math.round(job.impactScore / 10);
               const isActive = index === activeIndex;
 
               return (
@@ -124,22 +112,12 @@ export default function Hero() {
                     {job.title}
                   </span>
 
-                  <span className="hidden items-center gap-0.5 sm:flex">
-                    {Array.from({ length: 10 }).map((_, tickIndex) => (
-                      <span
-                        key={tickIndex}
-                        className={`h-3 w-1 rounded-sm ${
-                          tickIndex < filledTicks
-                            ? LEVEL_COLOR[job.impactLevel]
-                            : "bg-slate-100"
-                        }`}
-                      />
-                    ))}
-                  </span>
-
-                  <span className="w-8 shrink-0 text-right text-sm tabular-nums text-slate-500">
-                    {job.impactScore}
-                  </span>
+                  <div className="hidden sm:block">
+                    <ImpactBar
+                      score={job.impactScore}
+                      level={job.impactLevel}
+                    />
+                  </div>
                 </div>
               );
             })}

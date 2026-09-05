@@ -1,34 +1,34 @@
-"use client";
-
-import { motion } from "framer-motion";
-
-const LEVEL_GRADIENT: Record<string, string> = {
-  Low: "from-emerald-400 to-emerald-500",
-  Medium: "from-amber-400 to-amber-500",
-  High: "from-rose-400 to-rose-500",
+const LEVEL_COLOR: Record<string, string> = {
+  Low: "bg-emerald-500",
+  Medium: "bg-amber-500",
+  High: "bg-rose-500",
 };
 
 export default function ImpactBar({
   score,
   level,
+  size = "sm",
 }: {
   score: number;
   level: "Low" | "Medium" | "High";
+  size?: "sm" | "md";
 }) {
+  const filledTicks = Math.round(score / 10);
+  const tickHeight = size === "md" ? "h-3.5" : "h-2.5";
+
   return (
-    <div>
-      <div className="mb-1.5 flex items-center justify-between text-sm font-bold text-slate-700">
-        <span>Skor Dampak AI</span>
-        <span>{score}/100</span>
-      </div>
-      <div className="h-3 w-full overflow-hidden rounded-full bg-slate-100">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: `${score}%` }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className={`h-full rounded-full bg-gradient-to-r ${LEVEL_GRADIENT[level]}`}
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: 10 }).map((_, index) => (
+        <span
+          key={index}
+          className={`w-1 rounded-sm ${tickHeight} ${
+            index < filledTicks ? LEVEL_COLOR[level] : "bg-slate-100"
+          }`}
         />
-      </div>
+      ))}
+      <span className="ml-2 text-xs font-medium tabular-nums text-slate-500">
+        {score}
+      </span>
     </div>
   );
 }

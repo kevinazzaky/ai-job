@@ -1,22 +1,20 @@
-import { ArrowRight } from "lucide-react";
-
 export default function FinalCTA() {
   return (
-    <section className="relative overflow-hidden py-20 text-white dark-pattern">
-      <div className="container relative mx-auto px-4 text-center">
-        <h2 className="mx-auto max-w-2xl text-3xl font-black md:text-4xl">
-          Pekerjaanmu Akan Berubah. Pastikan Kamu Berubah Bersamanya.
+    <section className="bg-[var(--color-primary)] py-24 text-white">
+      <div className="container mx-auto max-w-2xl px-4 text-center">
+        <p className="text-sm text-white/50">Sebelum kamu pergi</p>
+        <h2 className="font-display mt-3 text-3xl font-medium md:text-4xl">
+          Pekerjaanmu akan berubah. Pastikan kamu berubah bersamanya.
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-white/75">
+        <p className="mx-auto mt-4 max-w-md text-sm text-white/70">
           Mulai dengan memahami dampak AI di bidangmu, lalu perkuat skill yang
           paling sulit digantikan.
         </p>
         <a
           href="#jobs"
-          className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-8 py-3 text-sm font-black text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:opacity-90"
+          className="mt-8 inline-block rounded-md bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
         >
-          Jelajahi Kariermu
-          <ArrowRight size={16} />
+          Jelajahi kariermu
         </a>
       </div>
     </section>

@@ -3,18 +3,7 @@
 import clsx from "clsx";
 import { getJobIcon } from "@/lib/icon-map";
 import type { Job } from "@/src/data/jobs";
-
-const LEVEL_LABEL: Record<string, string> = {
-  Low: "Rendah",
-  Medium: "Sedang",
-  High: "Tinggi",
-};
-
-const LEVEL_BADGE: Record<string, string> = {
-  Low: "bg-emerald-100 text-emerald-700",
-  Medium: "bg-amber-100 text-amber-700",
-  High: "bg-rose-100 text-rose-700",
-};
+import ImpactBar from "@/src/components/jobs/ImpactBar";
 
 export default function JobCard({
   job,
@@ -33,43 +22,20 @@ export default function JobCard({
       onClick={onSelect}
       aria-pressed={isActive}
       className={clsx(
-        "card-hover flex w-full flex-col items-start gap-3 rounded-2xl border p-5 text-left",
+        "flex w-full flex-col gap-3 border-l-2 px-4 py-4 text-left transition-colors",
         isActive
-          ? "border-transparent bg-[var(--color-primary)] text-white"
-          : "border-slate-200 bg-white text-slate-950",
+          ? "border-[var(--color-accent)] bg-slate-50"
+          : "border-transparent hover:bg-slate-50",
       )}
     >
-      <div
-        className={clsx(
-          "inline-flex h-10 w-10 items-center justify-center rounded-xl",
-          isActive
-            ? "bg-[var(--color-accent)] text-white"
-            : "bg-slate-100 text-slate-950",
-        )}
-      >
-        <Icon size={20} />
+      <div className="flex items-center gap-2.5">
+        <Icon size={16} className="shrink-0 text-slate-400" />
+        <h3 className="text-sm font-semibold text-slate-950">{job.title}</h3>
       </div>
 
-      <div>
-        <h3 className="font-bold">{job.title}</h3>
-        <p
-          className={clsx(
-            "text-xs",
-            isActive ? "text-white/60" : "text-slate-500",
-          )}
-        >
-          {job.category}
-        </p>
-      </div>
+      <p className="text-xs text-slate-500">{job.category}</p>
 
-      <span
-        className={clsx(
-          "rounded-full px-2.5 py-1 text-xs font-bold",
-          isActive ? "bg-white/15 text-white" : LEVEL_BADGE[job.impactLevel],
-        )}
-      >
-        Dampak {LEVEL_LABEL[job.impactLevel]}
-      </span>
+      <ImpactBar score={job.impactScore} level={job.impactLevel} size="sm" />
     </button>
   );
 }
