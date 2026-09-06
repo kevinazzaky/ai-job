@@ -32,10 +32,6 @@ export default function Hero() {
       <div className="container mx-auto grid gap-14 px-4 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
         {/* LEFT */}
         <div className="max-w-xl">
-          <p className="mb-5 text-sm text-slate-500">
-            Indeks dampak AI dari 6 profesi
-          </p>
-
           <h1 className="font-display text-4xl font-medium leading-[1.1] tracking-tight text-slate-950 sm:text-5xl">
             Bagaimana AI akan mengubah pekerjaanmu?
           </h1>
