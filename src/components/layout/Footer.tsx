@@ -18,7 +18,7 @@ export default function Footer() {
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/60">
             Landing page interaktif untuk memahami bagaimana AI mengubah cara
             kerja di berbagai profesi — bukan sekadar ancaman, tapi pergeseran
-            cara kerja.
+            cara kerja kita sendiri.
           </p>
         </div>
 
