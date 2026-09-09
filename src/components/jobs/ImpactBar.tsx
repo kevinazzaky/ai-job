@@ -1,7 +1,7 @@
 const LEVEL_COLOR: Record<string, string> = {
-  Low: "bg-emerald-500",
-  Medium: "bg-amber-500",
-  High: "bg-rose-500",
+  Low: "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.7)]",
+  Medium: "bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.7)]",
+  High: "bg-rose-400 shadow-[0_0_6px_rgba(251,113,133,0.7)]",
 };
 
 export default function ImpactBar({
@@ -22,11 +22,11 @@ export default function ImpactBar({
         <span
           key={index}
           className={`w-1 rounded-sm ${tickHeight} ${
-            index < filledTicks ? LEVEL_COLOR[level] : "bg-slate-100"
+            index < filledTicks ? LEVEL_COLOR[level] : "bg-white/10"
           }`}
         />
       ))}
-      <span className="ml-2 text-xs font-medium tabular-nums text-slate-500">
+      <span className="ml-2 text-xs font-medium tabular-nums text-slate-400">
         {score}
       </span>
     </div>

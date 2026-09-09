@@ -12,7 +12,7 @@ export default function FilterBar({
   onChange: (category: string) => void;
 }) {
   return (
-    <div className="mb-8 flex gap-6 overflow-x-auto border-b border-slate-200">
+    <div className="mb-10 flex flex-wrap gap-2">
       {categories.map((category) => (
         <button
           key={category}
@@ -20,10 +20,10 @@ export default function FilterBar({
           onClick={() => onChange(category)}
           aria-pressed={activeCategory === category}
           className={clsx(
-            "shrink-0 border-b-2 pb-3 text-sm font-medium transition-colors",
+            "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-all",
             activeCategory === category
-              ? "border-[var(--color-primary)] text-slate-950"
-              : "border-transparent text-slate-500 hover:text-slate-800",
+              ? "border-blue-400/50 bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0_0_20px_rgba(59,130,246,0.5)]"
+              : "border-white/10 bg-white/[0.03] text-slate-400 hover:border-white/20 hover:text-white",
           )}
         >
           {category}

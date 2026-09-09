@@ -28,13 +28,16 @@ export default function JobExplorer() {
   }
 
   return (
-    <section id="jobs" className="border-t border-slate-200 py-20">
+    <section id="jobs" className="relative border-t border-white/10 py-24">
+      <div className="glow-spot -left-40 top-1/3 size-96 opacity-40" />
+
       <div className="container mx-auto px-4">
         <div className="mb-10 max-w-xl">
-          <h2 className="font-display text-3xl font-medium text-slate-950">
+          <span className="eyebrow">Jelajahi</span>
+          <h2 className="mt-5 text-3xl font-semibold tracking-tight text-white">
             Jelajahi dampak AI di berbagai pekerjaan
           </h2>
-          <p className="mt-3 text-sm text-slate-600">
+          <p className="mt-3 text-sm text-slate-400">
             Pilih kategori untuk memfilter, lalu klik salah satu pekerjaan
             untuk melihat detail dampaknya.
           </p>
@@ -46,8 +49,8 @@ export default function JobExplorer() {
           onChange={handleFilterChange}
         />
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
-          <div className="divide-y divide-slate-100">
+        <div className="grid gap-4 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
+          <div className="grid gap-3">
             {filteredJobs.map((job) => (
               <JobCard
                 key={job.id}
