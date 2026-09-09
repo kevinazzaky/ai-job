@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 const CONCEPTS = [
   {
     title: "AI mengubah tugas, bukan menghapus semua pekerjaan",
@@ -18,31 +22,38 @@ const CONCEPTS = [
 
 export default function Intro() {
   return (
-    <section id="intro" className="border-t border-slate-200 py-20">
+    <section id="intro" className="relative border-t border-white/10 py-24">
       <div className="container mx-auto px-4">
         <div className="grid gap-10 lg:grid-cols-[0.6fr_1.4fr] lg:gap-16">
-          <h2 className="font-display text-3xl font-medium leading-tight text-slate-950">
-            AI mengubah cara kerja, bukan cuma pekerjaan
-          </h2>
+          <div>
+            <span className="eyebrow">Konsep Dasar</span>
+            <h2 className="mt-5 text-3xl font-semibold leading-tight tracking-tight text-white">
+              AI mengubah cara kerja, bukan cuma pekerjaan
+            </h2>
+          </div>
 
           <div>
             {CONCEPTS.map((concept, index) => (
-              <div
+              <motion.div
                 key={concept.title}
-                className="grid gap-2 border-b border-slate-200 py-6 first:pt-0 sm:grid-cols-[3rem_1fr] sm:gap-6"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="grid gap-2 border-b border-white/10 py-7 first:pt-0 sm:grid-cols-[3rem_1fr] sm:gap-6"
               >
-                <span className="font-display text-2xl text-slate-300">
+                <span className="bg-gradient-to-b from-blue-400 to-blue-700 bg-clip-text text-2xl font-semibold text-transparent">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-950">
+                  <h3 className="text-lg font-semibold text-white">
                     {concept.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                  <p className="mt-2 text-sm leading-6 text-slate-400">
                     {concept.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

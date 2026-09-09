@@ -1,3 +1,5 @@
+import { ArrowRight } from "lucide-react";
+
 const NAV_LINKS = [
   { label: "Beranda", href: "#home" },
   { label: "Tentang AI", href: "#intro" },
@@ -8,18 +10,28 @@ const NAV_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--color-primary)] text-white/60">
-      <div className="container mx-auto grid gap-10 px-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#05070d] text-white/60">
+      <div className="glow-spot left-1/2 top-0 size-160 -translate-x-1/2 -translate-y-2/3 opacity-30" />
+
+      <div className="container relative mx-auto grid gap-10 px-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-2">
-          <p className="font-display text-lg font-medium text-white">
+          <p className="text-lg font-semibold tracking-tight text-white">
             AI Job Impact
           </p>
 
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/60">
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/50">
             Landing page interaktif untuk memahami bagaimana AI mengubah cara
             kerja di berbagai profesi — bukan sekadar ancaman, tapi pergeseran
-            cara kerja kita sendiri hahahahahahhah.
+            cara kerja kita sendiri.
           </p>
+
+          <a
+            href="#jobs"
+            className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-300 transition hover:text-blue-200"
+          >
+            Mulai jelajahi
+            <ArrowRight size={14} />
+          </a>
         </div>
 
         <div>
@@ -50,7 +62,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-white/10">
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-6 text-xs text-white/40 sm:flex-row">
           <p>
             © {new Date().getFullYear()} AI Job Impact. Hak cipta dilindungi.
