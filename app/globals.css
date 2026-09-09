@@ -1,18 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #0c1a2e;
-  --color-secondary: #0f2540;
+  /* Surfaces */
+  --bg-base: #05070d;
+  --bg-elevated: #0b1220;
+  --bg-elevated-hover: #101a30;
 
-  --color-accent: #0ea5e9;
-  --color-accent-soft: #e0f2fe;
+  /* Borders */
+  --border-subtle: rgba(148, 163, 184, 0.12);
+  --border-strong: rgba(148, 163, 184, 0.24);
+  --border-accent: rgba(59, 130, 246, 0.4);
 
-  --color-blue: #0284c7;
-  --color-blue-dark: #0c4a6e;
-  --color-blue-soft: #f0f9ff;
+  /* Accent */
+  --accent: #3b82f6;
+  --accent-light: #60a5fa;
+  --accent-deep: #1d4ed8;
+  --accent-glow: rgba(59, 130, 246, 0.45);
 
-  --color-soft: #f8fafc;
-  --color-border: #e2e8f0;
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Legacy aliases still referenced around the app */
+  --color-primary: var(--bg-base);
+  --color-secondary: var(--bg-elevated);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-glow);
 }
 
 html {
@@ -20,10 +34,149 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #0f172a;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
 }
 
-.font-display {
-  font-family: var(--font-fraunces), serif;
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* ---------- Shared surfaces ----------
+   Wrapped in @layer components so Tailwind utilities (e.g. `hidden`,
+   `lg:inline-flex`) always win the cascade over these classes,
+   regardless of source order. */
+
+@layer components {
+  .glass-panel {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.015)
+    );
+    border: 1px solid var(--border-subtle);
+    backdrop-filter: blur(20px);
+  }
+
+  .glass-panel-active {
+    background: linear-gradient(
+      180deg,
+      rgba(59, 130, 246, 0.14),
+      rgba(59, 130, 246, 0.04)
+    );
+    border: 1px solid var(--border-accent);
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.08), 0 20px 40px -20px
+      rgba(59, 130, 246, 0.35);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.35rem 0.85rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+    border: 1px solid rgba(96, 165, 250, 0.5);
+    box-shadow: 0 8px 24px -8px rgba(59, 130, 246, 0.65);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 10px 30px -6px rgba(59, 130, 246, 0.8);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-strong);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(148, 163, 184, 0.4);
+  }
+
+  /* ---------- Glow backgrounds ---------- */
+
+  .glow-hero {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .glow-hero::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    width: 1100px;
+    height: 700px;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      ellipse at center,
+      rgba(59, 130, 246, 0.35),
+      rgba(29, 78, 216, 0.12) 45%,
+      transparent 70%
+    );
+    filter: blur(40px);
+  }
+
+  .glow-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(148, 163, 184, 0.05) 0px,
+      rgba(148, 163, 184, 0.05) 1px,
+      transparent 1px,
+      transparent 120px
+    );
+    mask-image: linear-gradient(to bottom, black, transparent 80%);
+  }
+
+  .glow-spot {
+    position: absolute;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      rgba(59, 130, 246, 0.55),
+      transparent 70%
+    );
+    filter: blur(60px);
+    pointer-events: none;
+  }
 }
